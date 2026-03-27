@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A sleek, modern Snake Game built with HTML, CSS, and JavaScript. Play the classic arcade game with stunning neon visuals.">
+    <title>Snake Game | Neon Arcade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <div class="container">
+        <header>
+            <h1 class="title">
+                <span class="title-icon">🐍</span>
+                <span>SNAKE</span>
+                <span class="title-accent">GAME</span>
+            </h1>
+        </header>
+
+        <div class="game-wrapper">
+            <!-- Scoreboard -->
+            <div class="scoreboard">
+                <div class="score-card" id="score-card">
+                    <div class="score-label">SCORE</div>
+                    <div class="score-value" id="score">0</div>
+                </div>
+                <div class="score-card high-score-card">
+                    <div class="score-label">HIGH SCORE</div>
+                    <div class="score-value" id="high-score">0</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-label">SPEED</div>
+                    <div class="score-value" id="speed-display">1</div>
+                </div>
+            </div>
+
+            <!-- Game Canvas Area -->
+            <div class="canvas-container">
+                <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+                <!-- Overlay: Start Screen -->
+                <div class="overlay" id="start-screen">
+                    <div class="overlay-content">
+                        <div class="overlay-icon">🐍</div>
+                        <h2>SNAKE GAME</h2>
+                        <p>Use <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> to move</p>
+                        <button class="btn btn-start" id="start-btn">
+                            <span class="btn-text">START GAME</span>
+                            <span class="btn-glow"></span>
+                        </button>
+                        <div class="difficulty-selector">
+                            <span class="diff-label">Difficulty:</span>
+                            <button class="diff-btn active" data-speed="easy" id="diff-easy">Easy</button>
+                            <button class="diff-btn" data-speed="medium" id="diff-medium">Medium</button>
+                            <button class="diff-btn" data-speed="hard" id="diff-hard">Hard</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Overlay: Game Over -->
+                <div class="overlay hidden" id="gameover-screen">
+                    <div class="overlay-content">
+                        <div class="overlay-icon">💀</div>
+                        <h2>GAME OVER</h2>
+                        <p class="final-score">Score: <span id="final-score">0</span></p>
+                        <p class="new-high" id="new-high" style="display:none;">🎉 NEW HIGH SCORE! 🎉</p>
+                        <button class="btn btn-restart" id="restart-btn">
+                            <span class="btn-text">PLAY AGAIN</span>
+                            <span class="btn-glow"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Overlay: Paused -->
+                <div class="overlay hidden" id="pause-screen">
+                    <div class="overlay-content">
+                        <div class="overlay-icon">⏸️</div>
+                        <h2>PAUSED</h2>
+                        <p>Press <kbd>Space</kbd> to resume</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Controls -->
+            <div class="mobile-controls">
+                <div class="control-row">
+                    <button class="control-btn" id="btn-up">▲</button>
+                </div>
+                <div class="control-row">
+                    <button class="control-btn" id="btn-left">◄</button>
+                    <button class="control-btn" id="btn-down">▼</button>
+                    <button class="control-btn" id="btn-right">►</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Press <kbd>Space</kbd> to Pause/Resume &bull; Eat food to grow &bull; Don't hit walls or yourself!</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

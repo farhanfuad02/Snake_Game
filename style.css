@@ -1,0 +1,554 @@
+/* ===========================
+   CSS Variables & Reset
+   =========================== */
+:root {
+    --bg-primary: #0a0a1a;
+    --bg-secondary: #12122a;
+    --bg-card: rgba(20, 20, 50, 0.7);
+    --neon-green: #00ff88;
+    --neon-green-dim: #00cc6a;
+    --neon-cyan: #00e5ff;
+    --neon-pink: #ff2d75;
+    --neon-purple: #b24dff;
+    --neon-yellow: #ffe600;
+    --text-primary: #e8e8f0;
+    --text-secondary: #8888aa;
+    --border-color: rgba(0, 255, 136, 0.15);
+    --shadow-neon: 0 0 20px rgba(0, 255, 136, 0.3);
+    --shadow-neon-strong: 0 0 40px rgba(0, 255, 136, 0.5);
+    --font-display: 'Orbitron', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --canvas-size: 400px;
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    overflow: hidden;
+    position: relative;
+}
+
+/* ===========================
+   Background Glows
+   =========================== */
+.bg-glow {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+    animation: glowFloat 12s ease-in-out infinite alternate;
+}
+
+.bg-glow-1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--neon-purple), transparent 70%);
+    top: -150px;
+    left: -100px;
+}
+
+.bg-glow-2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--neon-green), transparent 70%);
+    bottom: -100px;
+    right: -80px;
+    animation-delay: -4s;
+}
+
+.bg-glow-3 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, var(--neon-cyan), transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: -8s;
+    opacity: 0.2;
+}
+
+@keyframes glowFloat {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -20px) scale(1.1); }
+    100% { transform: translate(-20px, 30px) scale(0.95); }
+}
+
+/* ===========================
+   Container
+   =========================== */
+.container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* ===========================
+   Header / Title
+   =========================== */
+header {
+    text-align: center;
+}
+
+.title {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.5), 0 0 60px rgba(0, 255, 136, 0.2);
+    animation: titlePulse 3s ease-in-out infinite;
+}
+
+.title-icon {
+    font-size: 2.8rem;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.6));
+    animation: iconBounce 2s ease-in-out infinite;
+}
+
+.title-accent {
+    color: var(--neon-green);
+}
+
+@keyframes titlePulse {
+    0%, 100% { text-shadow: 0 0 20px rgba(0, 255, 136, 0.5), 0 0 60px rgba(0, 255, 136, 0.2); }
+    50% { text-shadow: 0 0 30px rgba(0, 255, 136, 0.7), 0 0 80px rgba(0, 255, 136, 0.3); }
+}
+
+@keyframes iconBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* ===========================
+   Game Wrapper
+   =========================== */
+.game-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+/* ===========================
+   Scoreboard
+   =========================== */
+.scoreboard {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+    max-width: var(--canvas-size);
+}
+
+.score-card {
+    flex: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 12px 8px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.score-card:hover {
+    border-color: rgba(0, 255, 136, 0.4);
+    box-shadow: var(--shadow-neon);
+}
+
+.score-label {
+    font-family: var(--font-display);
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.score-value {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--neon-green);
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.high-score-card .score-value {
+    color: var(--neon-yellow);
+    text-shadow: 0 0 10px rgba(255, 230, 0, 0.5);
+}
+
+.score-card.score-pop {
+    animation: scorePop 0.3s ease;
+}
+
+@keyframes scorePop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); border-color: var(--neon-green); box-shadow: var(--shadow-neon-strong); }
+    100% { transform: scale(1); }
+}
+
+/* ===========================
+   Canvas Container
+   =========================== */
+.canvas-container {
+    position: relative;
+    width: var(--canvas-size);
+    height: var(--canvas-size);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid var(--border-color);
+    box-shadow: var(--shadow-neon), inset 0 0 60px rgba(0, 0, 0, 0.5);
+    background: var(--bg-secondary);
+}
+
+#gameCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+}
+
+/* ===========================
+   Overlays
+   =========================== */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 5, 20, 0.92);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    animation: overlayFadeIn 0.4s ease;
+}
+
+.overlay.hidden {
+    display: none;
+}
+
+@keyframes overlayFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.overlay-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.overlay-icon {
+    font-size: 4rem;
+    animation: iconBounce 2s ease-in-out infinite;
+}
+
+.overlay-content h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 6px;
+    color: var(--neon-green);
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
+
+.overlay-content p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+kbd {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    color: var(--neon-cyan);
+    margin: 0 2px;
+}
+
+.final-score {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--text-primary) !important;
+}
+
+.final-score span {
+    color: var(--neon-green);
+    font-weight: 700;
+}
+
+.new-high {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    color: var(--neon-yellow) !important;
+    animation: newHighPulse 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes newHighPulse {
+    from { transform: scale(1); text-shadow: 0 0 10px rgba(255, 230, 0, 0.3); }
+    to { transform: scale(1.05); text-shadow: 0 0 30px rgba(255, 230, 0, 0.7); }
+}
+
+/* ===========================
+   Buttons
+   =========================== */
+.btn {
+    position: relative;
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    padding: 14px 40px;
+    border: 2px solid var(--neon-green);
+    background: transparent;
+    color: var(--neon-green);
+    border-radius: 50px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin-top: 6px;
+}
+
+.btn:hover {
+    background: var(--neon-green);
+    color: var(--bg-primary);
+    box-shadow: var(--shadow-neon-strong);
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-glow {
+    position: absolute;
+    inset: -2px;
+    border-radius: 50px;
+    background: linear-gradient(45deg, var(--neon-green), var(--neon-cyan), var(--neon-purple), var(--neon-green));
+    background-size: 400% 400%;
+    z-index: -1;
+    opacity: 0;
+    filter: blur(12px);
+    transition: opacity 0.3s ease;
+    animation: glowRotate 3s linear infinite;
+}
+
+.btn:hover .btn-glow {
+    opacity: 0.7;
+}
+
+@keyframes glowRotate {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===========================
+   Difficulty Selector
+   =========================== */
+.difficulty-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.diff-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+    font-family: var(--font-display);
+}
+
+.diff-btn {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    padding: 6px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: transparent;
+    color: var(--text-secondary);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.diff-btn:hover {
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+}
+
+.diff-btn.active {
+    border-color: var(--neon-green);
+    color: var(--neon-green);
+    background: rgba(0, 255, 136, 0.1);
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+}
+
+/* ===========================
+   Mobile Controls
+   =========================== */
+.mobile-controls {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.control-row {
+    display: flex;
+    gap: 6px;
+}
+
+.control-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 1.4rem;
+    border: 2px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--neon-green);
+    border-radius: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+.control-btn:active {
+    background: rgba(0, 255, 136, 0.15);
+    border-color: var(--neon-green);
+    box-shadow: var(--shadow-neon);
+    transform: scale(0.92);
+}
+
+/* ===========================
+   Footer
+   =========================== */
+footer {
+    text-align: center;
+    max-width: var(--canvas-size);
+}
+
+footer p {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+}
+
+/* ===========================
+   Responsive Design
+   =========================== */
+@media (max-width: 480px) {
+    :root {
+        --canvas-size: 320px;
+    }
+
+    .title {
+        font-size: 1.5rem;
+        letter-spacing: 3px;
+        gap: 8px;
+    }
+
+    .title-icon {
+        font-size: 1.8rem;
+    }
+
+    .score-value {
+        font-size: 1.2rem;
+    }
+
+    .mobile-controls {
+        display: flex;
+    }
+
+    body {
+        overflow: auto;
+    }
+
+    .bg-glow {
+        display: none;
+    }
+
+    .overlay-icon {
+        font-size: 3rem;
+    }
+
+    .overlay-content h2 {
+        font-size: 1.4rem;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    :root {
+        --canvas-size: 380px;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+}
+
+/* ===========================
+   Touch / Hover Media
+   =========================== */
+@media (hover: none) and (pointer: coarse) {
+    .mobile-controls {
+        display: flex;
+    }
+}
+
+/* ===========================
+   Selection Styling
+   =========================== */
+::selection {
+    background: rgba(0, 255, 136, 0.3);
+    color: var(--text-primary);
+}
+
+/* ===========================
+   Scrollbar Styling
+   =========================== */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 136, 0.3);
+    border-radius: 3px;
+}
